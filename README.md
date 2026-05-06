@@ -3,11 +3,6 @@
 > 寻找你心中的理想社会形态。一个社会形态偏好测试工具。
 > Discover your ideal societal form. A social preference test tool.
 
-## 立项过程
-
-- **执行者**：DeepSeek V4
-- **设计者 / 打杂的**：AragornDaoZhen
-
 ## 项目结构
 
 ```
@@ -64,4 +59,9 @@ systemctl restart utopia-test
 - 仓库: `https://github.com/AragornDaoZhen/Utopia-Test`
 - 主要分支: `main`
 - 回溯版本: `git log --oneline` → `git checkout <commit-id>`
+
+## 立项过程
+
+- **执行者**：DeepSeek V4
+- **设计者 / 打杂的**：AragornDaoZhen
 

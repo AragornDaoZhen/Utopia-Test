@@ -2,11 +2,6 @@
 
 > Discover your ideal societal form. A social preference test tool.
 
-## Project Origin
-
-- **Executor**: DeepSeek V4
-- **Designer / Jack-of-all-trades**: AragornDaoZhen
-
 ## Project Structure
 
 ```
@@ -90,3 +85,8 @@ Dashboard: `http://<your-server-ip>:5000/admin`
 
 - Repository: `https://github.com/AragornDaoZhen/Utopia-Test`
 - Branch: `main`
+
+## Project Origin
+
+- **Executor**: DeepSeek V4
+- **Designer / Jack-of-all-trades**: AragornDaoZhen
