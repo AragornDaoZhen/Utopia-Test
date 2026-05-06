@@ -1,6 +1,12 @@
 # 乌托邦测试 — Utopia Test
 
 > 寻找你心中的理想社会形态。一个社会形态偏好测试工具。
+> Discover your ideal societal form. A social preference test tool.
+
+## 立项过程
+
+- **执行者**：DeepSeek V4
+- **设计者 / 打杂的**：AragornDaoZhen
 
 ## 项目结构
 
@@ -10,12 +16,12 @@ utopia-test/
 ├── api/index.py              # Vercel Serverless 入口
 ├── vercel.json               # Vercel 部署配置
 ├── deploy.sh                 # 服务器一键部署脚本
-├── config.example.json       # 项目参数配置模板
+├── migrate_data.py           # 数据迁移脚本
 ├── requirements.txt          # Python 依赖
 ├── data/
 │   ├── dimensions.py         # 4维度×4取值定义+卡片颜色
 │   ├── results.py            # 16结果类型+描述+举例
-│   └── stats.json            # 统计数据(运行时生成)
+│   └── __init__.py
 ├── templates/
 │   ├── index.html            # 主页
 │   └── admin.html            # 统计管理面板
@@ -58,3 +64,4 @@ systemctl restart utopia-test
 - 仓库: `https://github.com/AragornDaoZhen/Utopia-Test`
 - 主要分支: `main`
 - 回溯版本: `git log --oneline` → `git checkout <commit-id>`
+
