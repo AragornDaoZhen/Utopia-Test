@@ -38,7 +38,7 @@ After=network.target
 
 [Service]
 User=root
-WorkingDirectory=/opt/utopia-test/utopia-test
+WorkingDirectory=/opt/utopia-test
 ExecStart=/opt/utopia-test/venv/bin/python3 app.py
 Restart=always
 RestartSec=3
