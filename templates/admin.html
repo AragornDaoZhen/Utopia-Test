@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta charset="UTF-8"><title>统计面板 - 乌托邦测试</title>
+<style>
+    body{font-family:system-ui,sans-serif;max-width:860px;margin:40px auto;padding:20px;background:#fafafa;color:#222}
+    h1{font-size:1.5rem}h2{font-size:1.1rem;margin-top:2rem}
+    table{width:100%;border-collapse:collapse;margin:1rem 0}
+    th,td{padding:8px 12px;text-align:left;border-bottom:1px solid #e0e0e0}
+    th{background:#f0f0f0;font-weight:600}
+    .bar{display:inline-block;height:16px;background:#3d7ec7;border-radius:3px;min-width:2px}
+    .code{font-weight:700;color:#3d7ec7}
+    .charts{display:flex;gap:2rem;flex-wrap:wrap;align-items:flex-start}
+    .chart-box{flex:1;min-width:300px;max-width:420px}
+    .bar-chart{display:flex;flex-direction:column;gap:4px;margin:1rem 0;max-width:500px}
+    .bar-row{display:flex;align-items:center;gap:6px}
+    .bar-label{width:40px;text-align:right;font-size:.8rem;color:#555}
+    .bar-left,.bar-right{height:20px;border-radius:3px}
+    .bar-left{background:#3d7ec7;margin-left:auto}
+    .bar-right{background:#d4a03c}
+    .bar-val{font-size:.75rem;color:#888;width:30px}
+    .axis{width:2px;height:100%;background:#ccc;position:absolute;left:50%}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+    <h1>乌托邦测试 统计面板</h1>
+    <p>总参与人数: <strong>{{ total }}</strong></p>
+
+    <div class="charts">
+        <div class="chart-box"><h2>全员玫瑰图</h2><canvas id="rose-all"></canvas></div>
+        <div class="chart-box" style="position:relative">
+            <h2>8轴平均值</h2>
+            <div class="bar-chart" style="position:relative">
+                <div class="axis"></div>
+                {% set poles = ['独立','平等','和谐','保守','协作','阶级','竞争','进步'] %}
+                {% set maxv = [1,1,1,1,1,1,1,1] %}
+                {% for i in range(8) %}
+                {% set v = stats.pole_avg[i] if stats.pole_avg else 0 %}
+                <div class="bar-row">
+                    <span class="bar-label">{{ poles[i] }}</span>
+                    {% if i < 4 %}
+                    <div class="bar-left" style="width:{{ (v/maxv[i]*180)|round(0) }}px"></div>
+                    <span class="bar-val">{{ v }}</span>
+                    <div style="width:180px"></div>
+                    {% else %}
+                    <div style="width:180px"></div>
+                    <span class="bar-val">{{ v }}</span>
+                    <div class="bar-right" style="width:{{ (v/maxv[i]*180)|round(0) }}px"></div>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <h2>16 类型分布</h2>
+    <table>
+        <tr><th>缩写</th><th>人数</th><th>占比</th><th>分布</th></tr>
+        {% for code, info in stats.distribution.items() %}
+        <tr><td class="code">{{ code }}</td><td>{{ info.count }}</td><td>{{ info.pct }}%</td><td><span class="bar" style="width:{{ info.pct * 3 }}px"></span></td></tr>
+        {% endfor %}
+    </table>
+
+    <h2>最近原始数据</h2>
+    <table>
+        <tr><th>IP</th><th>分工</th><th>阶级</th><th>竞争</th><th>科技</th><th>举例</th><th>时间</th></tr>
+        {% for r in raw %}
+        {% set v = r.get('values', []) %}
+        <tr><td style="font-size:.7rem;max-width:100px;overflow:hidden">{{ r.ip or '' }}</td><td>{{ v[0] if v|length > 0 else '' }}</td><td>{{ v[1] if v|length > 1 else '' }}</td><td>{{ v[2] if v|length > 2 else '' }}</td><td>{{ v[3] if v|length > 3 else '' }}</td><td style="max-width:120px;overflow:hidden;font-size:.7rem">{{ (r.text or '')[:20] }}</td><td style="font-size:.7rem;color:#888">{{ (r.time or '')[:16] }}</td></tr>
+        {% endfor %}
+    </table>
+
+    {% if examples %}
+    <h2>测试者举例 (最近50条)</h2>
+    <table>
+        <tr><th>#</th><th>类型</th><th>举例内容</th><th>时间</th></tr>
+        {% for ex in examples %}
+        <tr><td>{{ loop.index }}</td><td class="code">{{ ex.code }}</td><td style="max-width:400px;word-break:break-all">{{ ex.text }}</td><td style="font-size:.78rem;color:#888">{{ ex.time[:16] }}</td></tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+
+    <script>
+    const poleLabels = ['独立','平等','和谐','保守','协作','阶级','竞争','进步'];
+    const poleAvg = {{ stats.pole_avg | tojson }};
+    new Chart(document.getElementById('rose-all'),{
+        type:'polarArea',
+        data:{labels:poleLabels,datasets:[{data:poleAvg,
+            backgroundColor:['#40404088','#5C8F3788','#F16C6C88','#34A8B288','#F4BB3088','#8B4EC488','#D9564588','#5099EA88'],
+            borderColor:['#404040','#5C8F37','#F16C6C','#34A8B2','#F4BB30','#8B4EC4','#D95645','#5099EA'],
+            borderWidth:1.5}]},
+        options:{responsive:true,scales:{r:{beginAtZero:true,max:2,min:0,
+            ticks:{stepSize:1,display:false},grid:{color:'rgba(0,0,0,.06)'},angleLines:{color:'rgba(0,0,0,.06)'},
+            pointLabels:{color:'#444',font:{size:11,family:"'Noto Serif SC','Source Han Serif CN',serif"}}}},plugins:{legend:{display:false}}}
+    });
+    </script>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>乌托邦测试 — Utopia Test</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <!-- 背景装饰 -->
+    <div class="bg-decor">
+        <div class="bg-hex bg-hex-1"></div>
+        <div class="bg-hex bg-hex-2"></div>
+        <div class="bg-hex bg-hex-3"></div>
+        <div class="bg-line bg-line-1"></div>
+        <div class="bg-line bg-line-2"></div>
+    </div>
+
+    <main id="app">
+
+        <!-- ====== Intro ====== -->
+        <section id="intro" class="section intro-section">
+            <div class="intro-content">
+                <div class="title-frame">
+                    <div class="title-frame-corner tl"></div>
+                    <div class="title-frame-corner tr"></div>
+                    <div class="title-frame-corner bl"></div>
+                    <div class="title-frame-corner br"></div>
+                    <h1 class="main-title">
+                        <span class="title-line">乌托邦测试</span>
+                        <span class="title-line en">Utopia Test</span>
+                    </h1>
+                </div>
+                <p class="intro-tagline">🧭</p>
+                <div class="intro-divider">
+                    <span class="divider-diamond"></span>
+                </div>
+                <div class="intro-text">
+                    <p>有的人认可宏大叙事，有的人反对宏大叙事，从相对主义的角度不会评判谁对谁错，只不过是彼此的价值观并不一样，对于乌托邦的讨论也是如此。比起理想变成现实，更大的问题是如何避免"<em>彼之天堂，吾之地狱</em>"——你的乌托邦，可能恰恰是他人的反乌托邦。</p>
+                    <p>在反乌托邦流行的当代，讨论乌托邦显得腐朽。用流行的解构主义对乌托邦进行解构——这里将乌托邦解构为<strong>"理想的社会形态"</strong>，不再是莫尔的《乌托邦》、空想社会主义、或某种唯一的社会形态——你的心中是否存在一个乌托邦？或者说桃花源、幻想乡、理想国？无论你是对现实无忧无虑，还是对现实有所思考，其实都必然存在你最认可的某种具体的社会形态。</p>
+                </div>
+                <div class="scroll-hint">
+                    <span>向下滑动</span>
+                    <div class="scroll-arrow"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ====== Cards ====== -->
+        <section id="cards" class="section cards-section">
+            {% for dim in dimensions %}
+            <div class="dimension-group" id="dim-{{ dim.id }}" data-dim="{{ dim.id }}">
+                <h2 class="dim-title">
+                    <span class="dim-num">{{ dim.id + 1 }}</span>
+                    {{ dim.name }}
+                </h2>
+                <div class="card-row">
+                    {% for val, card in dim.cards.items() | sort %}
+                    <div class="card-wrapper">
+                        <div class="card" data-dim="{{ dim.id }}" data-value="{{ val }}">
+                            <div class="card-face card-front" style="background: linear-gradient(135deg, {{ card.color }}, rgba(0,0,0,0.4));">
+                                <div class="card-front-pattern">
+                                    <span class="card-front-label">{{ card.abbr }}</span>
+                                </div>
+                            </div>
+                            <div class="card-face card-back">
+                                <span class="card-back-text">{{ card.text }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="dim-progress">
+                    {% for val, card in dim.cards.items() | sort %}
+                    <span class="dot" data-dim="{{ dim.id }}" data-dot="{{ val }}"></span>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+            <div id="bottom-trigger" class="bottom-trigger"></div>
+        </section>
+
+        <!-- ====== Result ====== -->
+        <section id="result" class="section result-section hidden">
+            <div id="result-content"></div>
+        </section>
+
+    </main>
+
+    <nav id="side-progress" class="side-progress">
+        <span class="sp-dot" data-sp="0"></span>
+        <span class="sp-dot" data-sp="1"></span>
+        <span class="sp-dot" data-sp="2"></span>
+        <span class="sp-dot" data-sp="3"></span>
+    </nav>
+
+    <div id="bottom-hint" class="bottom-hint hidden">
+        <span>翻开全部卡片并选择其中四个即可查看结果</span>
+    </div>
+
+    <div id="toast" class="toast hidden"></div>
+
+    <div id="confirm-modal" class="modal-overlay hidden">
+        <div class="modal-box">
+            <p class="modal-text">是否查看结果？</p>
+            <div class="modal-buttons">
+                <button id="btn-yes" class="modal-btn btn-primary">是</button>
+                <button id="btn-no" class="modal-btn btn-secondary">否</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    window.DIMENSIONS = {{ dimensions | tojson | safe }};
+    window.RESULTS = {{ results | tojson | safe }};
+    </script>
+    <script src="/static/js/i18n.js"></script>
+    <script src="/static/js/app.js"></script>
+</body>
+</html>

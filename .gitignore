@@ -1,0 +1,15 @@
+__pycache__/
+*.pyc
+*.pyo
+.env
+config.json
+data/stats.json
+data/examples.json
+data/submitted_ips.json
+data/data.json
+data/whitelist.json
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
