@@ -2,27 +2,26 @@
 
 > Discover your ideal societal form. A social preference test tool.
 
+> ⚠️ This repository contains only the project design and frontend code. Backend and deployment code are not public.
+
 ## Project Structure
 
 ```
-├── app.py                    # Flask dev entry point
-├── api/index.py              # Vercel Serverless entry point
-├── vercel.json               # Vercel deploy config
-├── deploy.sh                 # One-click server deploy script
-├── migrate_data.py           # Data migration script
-├── requirements.txt          # Python dependencies
 ├── data/
 │   ├── dimensions.py         # 4 dims × 4 values, card colors
 │   ├── results.py            # 16 result types with descriptions & examples
 │   └── __init__.py
 ├── templates/
-│   ├── index.html            # Main page
-│   └── admin.html            # Stats dashboard
-└── public/static/
-    ├── css/style.css          # Main stylesheet
-    └── js/
-        ├── app.js             # Core logic (cards, scrolling, results, export)
-        └── i18n.js            # i18n script
+│   ├── index.html            # Main page template (Jinja2)
+│   └── admin.html            # Dashboard template (Jinja2)
+├── public/static/
+│   ├── css/style.css          # Main stylesheet
+│   └── js/
+│       ├── app.js             # Core logic (cards, scrolling, results, export)
+│       └── i18n.js            # i18n script
+├── README.md                  # Chinese docs
+├── README_EN.md               # English docs
+└── .gitignore
 ```
 
 ## Core Mechanics
@@ -55,31 +54,12 @@ Each result displays:
 - **Card matrix** — per-card selection distribution across all users
 - **Optional user submission** — share your own utopia example
 
-## Local Development
+## Tech Stack (Frontend)
 
-```powershell
-cd utopia-test
-pip install -r requirements.txt
-python app.py
-# Open http://127.0.0.1:5000
-```
-
-## Server Deployment
-
-```bash
-ssh root@<your-server-ip>
-cd /opt/utopia-test && git pull
-systemctl restart utopia-test
-```
-
-Dashboard: `http://<your-server-ip>:5000/admin`
-
-## Tech Stack
-
-- **Backend**: Python Flask (dev) / Vercel Serverless (production)
-- **Frontend**: Vanilla JS + CSS, Chart.js 4.4 (polarArea), html2canvas 1.4
-- **Font**: Noto Serif SC (Source Han Serif) via Google Fonts
-- **Data**: JSON flat-file storage (data.json — excluded from git)
+- HTML5 / CSS3 / Vanilla JavaScript
+- Chart.js 4.4 — polar area chart
+- html2canvas 1.4 — result image export
+- Noto Serif SC (Source Han Serif) via Google Fonts
 
 ## GitHub
 
