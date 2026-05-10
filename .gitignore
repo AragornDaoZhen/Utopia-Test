@@ -3,6 +3,7 @@ __pycache__/
 *.pyo
 .env
 config.json
+app.py
 data/stats.json
 data/examples.json
 data/submitted_ips.json
