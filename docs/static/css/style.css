@@ -246,6 +246,11 @@ body{
 .share-btn{display:block;width:100%;max-width:300px;margin:0 auto;padding:.9rem 2rem;background:linear-gradient(135deg,var(--gold),#a07428);color:#fff;border:none;border-radius:12px;font-size:1.05rem;font-weight:700;cursor:pointer;transition:transform .2s,box-shadow .2s;box-shadow:0 2px 12px rgba(184,132,46,.2);}
 .share-btn:hover{transform:scale(1.03);box-shadow:0 4px 20px rgba(184,132,46,.3);}
 
+/* GitHub Link */
+.github-btn{display:flex;align-items:center;justify-content:center;gap:.4rem;width:100%;max-width:300px;margin:.6rem auto 0;padding:.6rem 2rem;background:var(--bg-card);color:var(--text-secondary);border:1px solid var(--border);border-radius:10px;font-size:.9rem;font-weight:500;text-decoration:none;cursor:pointer;transition:background .2s,border-color .2s;font-family:var(--font-body);}
+.github-btn:hover{background:var(--bg-secondary);border-color:var(--border-strong);color:var(--text-primary);}
+.github-btn svg{flex-shrink:0;}
+
 /* QR Code — hidden in result */
 .qr-export{position:absolute;bottom:6px;right:6px;width:36px;height:36px;opacity:.04;pointer-events:none;display:none;}
 

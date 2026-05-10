@@ -5,9 +5,17 @@
 
 > ⚠️ 本仓库仅包含项目设计与前端代码。后端与部署相关代码未公开。
 
+## 在线体验
+
+👉 [开始测试](https://aragorndaozhen.github.io/Utopia-Test/)（GitHub Pages 静态版，免后端）
+
 ## 项目结构
 
 ```
+├── docs/                      # 静态版（GitHub Pages 部署）
+│   ├── index.html             # 纯前端入口
+│   ├── data/
+│   └── static/
 ├── data/
 │   ├── dimensions.py         # 4维度×4取值定义+卡片颜色
 │   ├── results.py            # 16结果类型+描述+举例

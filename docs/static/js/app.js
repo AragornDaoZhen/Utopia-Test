@@ -333,6 +333,9 @@
             '<p class="result-ending-hint">20世纪的哲学家罗伯特·诺齐克（Robert Nozick）在政治哲学领域提出了"元乌托邦"（meta-utopia）或"乌托邦的框架"（framework for utopia）的概念，为解决此根本问题提供了思路和方向。</p>' +
             '</div>' +
             '<button id="share-btn" class="share-btn">保存结果图片</button>' +
+            '<a id="github-btn" class="github-btn" href="https://github.com/AragornDaoZhen/Utopia-Test" target="_blank" rel="noopener">' +
+            '<svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>' +
+            '<span>GitHub</span></a>' +
             '</div>';
     }
 
@@ -440,7 +443,7 @@
             btn.style.display = 'none';
             var qrEl = document.createElement('div');
             qrEl.style.cssText = 'position:absolute;bottom:8px;right:8px;z-index:10;pointer-events:none;';
-            qrEl.innerHTML = '<img src="https://api.qrserver.com/v1/create-qr-code/?size=40x40&data=https%3A%2F%2Fgithub.com%2FAragornDaoZhen%2FUtopia-Test&margin=0" style="width:40px;height:40px;opacity:.3">';
+            qrEl.innerHTML = '<img src="https://api.qrserver.com/v1/create-qr-code/?size=40x40&data=https%3A%2F%2Faragorndaozhen.github.io%2FUtopia-Test%2F&margin=0" style="width:40px;height:40px;opacity:.3">';
             container.style.position = 'relative';
             container.appendChild(qrEl);
             setTimeout(function () {

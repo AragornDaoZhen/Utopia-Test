@@ -4,9 +4,17 @@
 
 > ⚠️ This repository contains only the project design and frontend code. Backend and deployment code are not public.
 
+## Live Demo
+
+👉 [Take the test](https://aragorndaozhen.github.io/Utopia-Test/) (GitHub Pages, no backend required)
+
 ## Project Structure
 
 ```
+├── docs/                      # Static version (GitHub Pages deployment)
+│   ├── index.html             # Pure frontend entry
+│   ├── data/
+│   └── static/
 ├── data/
 │   ├── dimensions.py         # 4 dims × 4 values, card colors
 │   ├── results.py            # 16 result types with descriptions & examples
